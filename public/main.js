@@ -14,6 +14,10 @@ function addLog(time, type, msg) {
     $('#logCont').scrollTop(log.height());
 }
 
+function input(msg) {
+    socket.emit('input', msg);
+}
+
 $(function () {
     socket.emit('isStarted', function (started) {
         updateStatus(started);
@@ -39,4 +43,10 @@ $(function () {
     socket.on('stdin', function(msg) { addLog(new Date(), 'stdin', msg); });
     socket.on('stderr', function(msg) { addLog(new Date(), 'stderr', msg); });
     socket.on('logReset', function() { $('#log').empty(); });
+
+    $('#input').submit(function(event) {
+        input($('#input [name=command]').val());
+        $('#input [name=command]').val('');
+        return false;
+    });
 });

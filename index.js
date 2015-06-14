@@ -19,7 +19,9 @@ function DSTS() {
 DSTS.prototype = {
     start: function () {
         var that = this;
-        this.proc = spawn(that.path + '/dontstarve_dedicated_server_nullrenderer', [], {
+        this.proc = spawn(that.path + '/dontstarve_dedicated_server_nullrenderer', [
+            '-console'
+        ], {
             cwd: that.path
         });
         console.log("DST server started");
@@ -32,10 +34,6 @@ DSTS.prototype = {
         this.proc.stdout.on('data', function (data) {
             that.emit('stdout', data.toString());
             that.log.push({time: new Date(), type: 'stdout', msg: data.toString()});
-        });
-        this.proc.stdin.on('data', function (data) {
-            that.emit('stdin', data.toString());
-            that.log.push({time: new Date(), type: 'stdin', msg: data.toString()});
         });
         this.proc.stderr.on('data', function (data) {
             that.emit('stderr', data.toString());
@@ -51,6 +49,11 @@ DSTS.prototype = {
     resetLog: function() {
         this.log = [];
         this.emit('logReset');
+    },
+    input: function(msg) {
+        this.proc.stdin.write(msg + "\n");
+        this.emit('stdin', msg);
+        this.log.push({time: new Date(), type: 'stdin', msg: msg});
     }
 };
 
