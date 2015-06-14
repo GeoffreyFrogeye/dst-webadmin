@@ -25,11 +25,9 @@ DSTS.prototype = {
             cwd: that.path
         });
         console.log("DST server started");
-        process.on('exit', function() {
-            that.proc.kill();
-            console.log("DST server killed");
-        });
+        process.on('exit', that.kill);
         this.emit('started');
+
         this.resetLog();
         this.proc.stdout.on('data', function (data) {
             that.emit('stdout', data.toString());
@@ -39,6 +37,18 @@ DSTS.prototype = {
             that.emit('stderr', data.toString());
             that.log.push({time: new Date(), type: 'stderr', msg: data.toString()});
         });
+
+        this.proc.on('exit', function() {
+            console.log("DST server stopped");
+            that.kill();
+        });
+    },
+    kill: function() {
+        if (!this.proc) return;
+        this.proc.kill();
+        this.proc = null;
+        this.emit('stopped');
+        console.log("DST server killed");
     },
     isStarted: function (cb) {
         cb(!!this.proc);
@@ -63,6 +73,7 @@ for (var key in EventEmitter.prototype) {
 }
 
 var dsts = new DSTS();
+dsts.start();
 
 // Socket connection is some kind of proxy to dsts
 io.on('connection', function (socket) {

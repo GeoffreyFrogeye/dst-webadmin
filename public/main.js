@@ -21,9 +21,6 @@ function input(msg) {
 $(function () {
     socket.emit('isStarted', function (started) {
         updateStatus(started);
-        if (!started) {
-            socket.emit('start');
-        }
     });
     socket.emit('getLog', function (log) {
         for (var lineI in log) {

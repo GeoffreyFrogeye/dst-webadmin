@@ -12,9 +12,12 @@
 
 <body>
     <p>
-        Status :
+        Status:
         <span id="status">unknown</span>
         <br/>
+        <input type="button" value="Start" onclick="socket.emit('start')" />
+        <input type="button" value="Stop" onclick="input('c_shutdown()')" />
+        <input type="button" value="Kill" onclick="socket.emit('kill')" />
     </p>
     <div id="console">
         <div id="logCont">
