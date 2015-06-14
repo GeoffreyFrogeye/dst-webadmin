@@ -1,0 +1,21 @@
+{
+  "name": "dst-webadmin",
+  "version": "0.0.1",
+  "description": "A web administration interface for Don't Starve Together dedicated servers.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GeoffreyFrogeye/dst-webadmin.git"
+  },
+  "keywords": [
+    "dst",
+    "web",
+    "admin"
+  ],
+  "author": "Geoffrey Frogeye <geoffrey@frogeye.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GeoffreyFrogeye/dst-webadmin/issues"
+  },
+  "homepage": "https://github.com/GeoffreyFrogeye/dst-webadmin#readme"
+}
