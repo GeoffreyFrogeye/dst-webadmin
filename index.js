@@ -23,11 +23,35 @@ DSTS.prototype = {
             cwd: that.path
         });
         console.log("DST server started");
+        process.on('exit', function() {
+            that.proc.kill();
+            console.log("DST server killed");
+        });
         this.emit('started');
+        this.resetLog();
+        this.proc.stdout.on('data', function (data) {
+            that.emit('stdout', data.toString());
+            that.log.push({time: new Date(), type: 'stdout', msg: data.toString()});
+        });
+        this.proc.stdin.on('data', function (data) {
+            that.emit('stdin', data.toString());
+            that.log.push({time: new Date(), type: 'stdin', msg: data.toString()});
+        });
+        this.proc.stderr.on('data', function (data) {
+            that.emit('stderr', data.toString());
+            that.log.push({time: new Date(), type: 'stderr', msg: data.toString()});
+        });
     },
     isStarted: function (cb) {
         cb(!!this.proc);
     },
+    getLog: function(cb) {
+        cb(this.log);
+    },
+    resetLog: function() {
+        this.log = [];
+        this.emit('logReset');
+    }
 };
 
 // Inherit from EventEmitter
