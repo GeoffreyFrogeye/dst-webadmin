@@ -4,6 +4,8 @@ var http = require('http').Server(app);
 var io = require('socket.io').listen(http);
 var EventEmitter = require('events').EventEmitter;
 var spawn = require('child_process').spawn;
+var fs = require('fs');
+var ini = require('ini');
 
 app.use(express.static('./public'));
 
@@ -13,6 +15,7 @@ http.listen(8080, function () {
 
 function DSTS() {
     this.path = '../bin';
+    this.iniPath = (process.env.HOME || process.env.USERPROFILE) + '/.klei/DoNotStarveTogether/settings.ini';
     this.proc = null;
 }
 
@@ -64,6 +67,14 @@ DSTS.prototype = {
         this.proc.stdin.write(msg + "\n");
         this.emit('stdin', msg);
         this.log.push({time: new Date(), type: 'stdin', msg: msg});
+    },
+    readIni: function(cb) {
+        fs.readFile(this.iniPath, 'utf-8', function(err, data) {
+            if (err) {
+                throw err;
+            }
+            cb(ini.parse(data));
+        });
     }
 };
 

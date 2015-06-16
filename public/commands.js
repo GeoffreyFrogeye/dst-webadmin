@@ -1,3 +1,117 @@
+var settings = [{
+    name: "Name",
+    ini: 'network.default_server_name',
+    opts: {
+        type: 'text',
+        placeholder: "[Host]'s server"
+    }
+}, {
+    name: "Description",
+    ini: 'network.default_server_description',
+    opts: {
+        type: 'text'
+    }
+}, {
+    name: "Port",
+    ini: 'network.server_port',
+    opts: {
+        type: 'number',
+        min: 0,
+        max: 65535,
+        step: 1,
+        placeholder: 10999
+    }
+}, {
+    name: "Password",
+    ini: 'network.server_password',
+    opts: {
+        type: 'text'
+    }
+}, {
+    name: "Maximum player number",
+    ini: 'network.max_players',
+    opts: {
+        type: 'number',
+        min: 1,
+        max: 64,
+        step: 1,
+        placeholder: 64
+    }
+}, {
+    name: "PVP",
+    ini: 'network.pvp',
+    opts: {
+        type: 'checkbox',
+        value: 1
+    }
+}, {
+    name: "Game mode",
+    ini: 'network.game_mode',
+    opts: {
+        type: 'select',
+        options: ['endless', 'survival', 'wilderness']
+    }
+}, {
+    name: "Enable snapshots",
+    ini: 'network.enable_snapshots',
+    opts: {
+        type: 'checkbox',
+        value: 1
+    }
+}, {
+    name: "Enable autosaver",
+    ini: 'network.enable_autosaver',
+    opts: {
+        type: 'checkbox',
+        value: 1
+    }
+}, {
+    name: "Tick rate",
+    ini: 'network.tick_rate',
+    opts: {
+        type: 'select',
+        options: [10, 15, 30, 60]
+    }
+}, {
+    name: "Connection timeout",
+    ini: 'network.connection_timeout',
+    opts: {
+        type: 'number',
+        min: 1000,
+        max: 90000,
+        step: 1000,
+        placeholder: 8000,
+    }
+}, {
+    name: "Save slot",
+    ini: 'network.server_save_slot',
+    opts: {
+        type: 'select',
+        options: [1, 2, 3, 4, 5]
+    }
+}, {
+    name: "Enable vote kick",
+    ini: 'network.enable_vote_kick',
+    opts: {
+        type: 'checkbox',
+        value: 1
+    }
+}, {
+    name: "Pause when empty",
+    ini: 'network.pause_when_empty',
+    opts: {
+        type: 'checkbox',
+        value: 1
+    }
+}, {
+    name: "Dedicated LAN server",
+    ini: 'account.dedicated_lan_server',
+    opts: {
+        type: 'checkbox',
+        value: 1
+    }
+}];
+
 var globalCommands = [{
     name: "List all players",
     cmd: 'c_listallplayers()',
