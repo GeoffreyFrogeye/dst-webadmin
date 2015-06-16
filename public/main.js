@@ -20,11 +20,22 @@ function input(msg) {
 
 function deserializeForm(array) {
     var object = {};
-    Object.keys(valuesAr).map(function (value, index) {
-        value = valuesAr[index];
-        values[value.name] = value.value;
+    Object.keys(array).map(function (value, index) {
+        value = array[index];
+        object[value.name] = value.value;
     });
     return object;
+}
+
+function index(obj, is, value) { // From http://stackoverflow.com/a/6394168/2766106
+    if (typeof is == 'string')
+        return index(obj, is.split('.'), value);
+    else if (is.length == 1 && value !== undefined)
+        return obj[is[0]] = value;
+    else if (!is.length)
+        return obj;
+    else
+        return index(obj[is[0]], is.slice(1), value);
 }
 
 function parseArg(arg) {
@@ -134,32 +145,39 @@ $(function () {
         $('#globalCommands').append(form);
     }
 
-    socket.emit('readIni', function (object) {
-        var settingsSubmit = $('#serverSettings input[type=submit]');
+    var settingsSubmit = $('#serverSettings input[type=submit]');
 
-        function getIndex(obj, i) { // From http://stackoverflow.com/a/6394168/2766106
-            return obj[i];
+    for (var setI in settings) {
+        var set = settings[setI];
+        var label = $('<label>').text(set.name).attr('for', set.ini);
+        var opts = set.opts;
+        opts.name = set.ini;
+        var ctrl = parseArg(opts);
+        set.ctrl = ctrl;
+        settingsSubmit.before(label).before(' ').before(ctrl).before($('<br>'));
+    }
+    $('#serverSettings').submit(function (e) {
+        var table = deserializeForm($(e.target).serializeArray());
+        for (var ini in table) {
+            index(object, ini, table[ini]);
         }
+        socket.emit('writeIni', object, function () {
+            console.log("Server configuration saved.");
+        });
+        return false;
+    });
 
+    socket.emit('readIni', function (err, object) {
         for (var setI in settings) {
             var set = settings[setI];
-            var label = $('<label>').text(set.name).attr('for', set.ini);
-            var opts = set.opts;
-            opts.name = set.ini;
-            var ctrl = parseArg(opts);
-            var val = set.ini.split('.').reduce(getIndex, object);
+            var val = index(object, set.ini);
             if (val) {
-                if (opts.type == 'checkbox') {
-                    ctrl.prop('checked', val);
+                if (set.opts.type == 'checkbox') {
+                    set.ctrl.prop('checked', val);
                 } else {
-                    ctrl.val(val);
+                    set.ctrl.val(val);
                 }
             }
-            settingsSubmit.before(label).before(' ').before(ctrl).before($('<br>'));
         }
-        $('#serverSettings').submit(function (e) {
-            var table = deserializeForm(e.target.serializeArray());
-            return false;
-        });
     });
 });

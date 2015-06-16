@@ -73,8 +73,11 @@ DSTS.prototype = {
             if (err) {
                 throw err;
             }
-            cb(ini.parse(data));
+            cb(null, ini.parse(data));
         });
+    },
+    writeIni: function(object, cb) {
+        fs.writeFile(this.iniPath, ini.encode(object), cb);
     }
 };
 
@@ -84,7 +87,6 @@ for (var key in EventEmitter.prototype) {
 }
 
 var dsts = new DSTS();
-dsts.start();
 
 // Socket connection is some kind of proxy to dsts
 io.on('connection', function (socket) {
