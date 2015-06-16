@@ -1,3 +1,14 @@
+body {
+    background-color: black;
+    background-image: url("img/screen_index.png");
+    background-position: center top;
+    background-repeat: no-repeat;
+    margin: 0px;
+    margin-top: 140px;
+    padding: 0px;
+
+}
+
 #logCont {
     height: 300px;
     overflow: scroll;
@@ -17,4 +28,9 @@
 
 #logCont .stderr {
     background: #FFBBBB;
+}
+
+h1 {
+    text-align: center;
+    color: white;
 }
