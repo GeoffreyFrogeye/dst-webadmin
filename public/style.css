@@ -44,6 +44,7 @@ body {
     border-bottom: 2px groove #A35200;
     margin-top: -140px;
     padding-top: 10px;
+    padding-bottom: 10px;
     padding-left: 50px;
     z-index: 2;
     
@@ -56,22 +57,40 @@ body {
     text-shadow: 0px 1px 0px #A35200;
 }
 
-#start {
-    background-image: -webkit-linear-gradient(top, #0b283b, #285210);
+#status {
+    display: inline-block;
+    position : relative;
+    height: 45px;
+    border-right: 2px solid white;
+    padding-right: 10px;
+}
+
+.buttonControl {
     border-radius: 4;
     box-shadow: 0px 1px 3px #666666;
-    color: #3ac76b;
     font-size: 20px;
-    padding: 10px 20px 10px 20px;
+    padding: 7px 20px 7px 20px;
     border: dotted #fcfcfc 1px;
 }
 
+.buttonControl:hover {
+    cursor: pointer;
+}
+
+
+
+#start {
+    background-image: -webkit-linear-gradient(top, #0b283b, #285210);
+    color: #3ac76b;
+}
 #stop {
-    background-color: red;
+    background-image: -webkit-linear-gradient(top, #29051b, #521028);
+    color: #d91818;
 }
 
 #kill {
-    background-color: green;
+    background-image: -webkit-linear-gradient(top, #240b75, #043a8a);
+    color: #b0bbff
 }
 
 
