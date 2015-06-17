@@ -16,20 +16,33 @@
 
 
 <body>
-
-        <h1> DST server admin </h1>
+    
+    <!-- Tools bar -->
+    
+    <div id="toolsBar">
+        
+    
+    
+        <p>
+        <span id="status">Statue : Unknown</span>
+            
+            
+            <input type="button" value="Start" onclick="socket.emit('start')" />
+            <input type="button" value="Stop" onclick="input('c_shutdown(true)')" />
+            <input type="button" value="Kill" onclick="socket.emit('kill')" />
+        </p>
+        
+    </div>
+    
+    
+    <!-- Title -->
+    
+        <h1> Don't Starve Together server admin </h1>
   
     
-    <h2>Status</h2>
+ 
+    <!-- Console -->
     
-    <p>
-        <span id="status">Unknown</span>
-        <br/>
-        <input type="button" value="Start" onclick="socket.emit('start')" />
-        <input type="button" value="Stop" onclick="input('c_shutdown(true)')" />
-        <input type="button" value="Kill" onclick="socket.emit('kill')" />
-    </p>
-    <h2>Console</h2>
     <div id="console">
         <div id="logCont">
             <div id="log">
@@ -37,7 +50,7 @@
             </div>
         </div>
         <form id="input">
-            <input type="text" name="command">
+            <input type="text" value="This is a console !" name="command">
             <input type="submit" value="Send" />
         </form>
     </div>

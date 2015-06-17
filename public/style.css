@@ -9,6 +9,11 @@ body {
 
 }
 
+@font-face {
+    font-family: "belisa_plumilla";
+    src: url('font/belisa_plumilla.ttf');
+}
+
 #logCont {
     height: 300px;
     overflow: scroll;
@@ -30,7 +35,33 @@ body {
     background: #FFBBBB;
 }
 
+
+/* --- Tools bar --- */
+
+#toolsBar{
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    background-color: #000000;
+    border-bottom: 2px groove #A35200;
+    margin-top: -140px;
+    padding-left: 50px;
+    opacity: 0.8;
+}
+
+
+#console {
+    background-color: #000000;
+    border: 2px solid #FFA375;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+}
+
 h1 {
+    font-family: "belisa_plumilla";
     text-align: center;
     color: white;
+    font-size: 50px;
 }
