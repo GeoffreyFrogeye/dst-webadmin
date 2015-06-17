@@ -10,7 +10,7 @@ body {
 
 @font-face {
     font-family: "belisa_plumilla";
-    src: url('font/belisa_plumilla.ttf');
+    src: url('../font/belisa_plumilla.ttf');
 }
 
 #logCont {
@@ -38,6 +38,7 @@ body {
 
 #console {
     background-color: #000000;
+    padding-right: 10px;
     border: 2px solid #FFA375;
     display: block;
     margin-left: auto;
@@ -45,8 +46,13 @@ body {
     width: 600px;
 }
 
-#input input{
-    color: red;
+#stdin input[type="text"]{
+    width: 100%;
+    padding-left: 6px;
+    background-color: #000000;
+    color: #FFFFFF;
+    font-size: 16px;
+    border: none;
 }
 
 h1 {
