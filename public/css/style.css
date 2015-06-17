@@ -1,0 +1,58 @@
+body {
+    background-color: black;
+    background-image: url("../img/screen_index.png");
+    background-position: center top;
+    background-repeat: no-repeat;
+    margin: 0px;
+    margin-top: 140px;
+    padding: 0px;
+}
+
+@font-face {
+    font-family: "belisa_plumilla";
+    src: url('font/belisa_plumilla.ttf');
+}
+
+#logCont {
+    height: 300px;
+    overflow: scroll;
+}
+
+#logCont div {
+    display: block;
+}
+
+#logCont .stdout {
+    background: #BBBBFF;
+}
+
+#logCont .stdin {
+    background: #FFFFBB;
+}
+
+#logCont .stderr {
+    background: #FFBBBB;
+}
+
+/* --- Console --- */
+
+#console {
+    background-color: #000000;
+    border: 2px solid #FFA375;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+}
+
+#input input{
+    color: red;
+}
+
+h1 {
+    font-family: "belisa_plumilla";
+    text-align: center;
+    color: white;
+    font-size: 50px;
+}
+
