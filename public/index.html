@@ -3,35 +3,59 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>DST server administration</title>
+    <title>DST server admin</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
     <script src="commands.js"></script>
     <script src="main.js"></script>
-    <link rel="stylesheet" href="style.css"></link>
+    
+    <link rel="stylesheet" href="css/style.css"></link>
+    <link rel="stylesheet" href="css/toolsBar.css"></link>
+    
 </head>
 
+
 <body>
-    <h2>Status</h2>
-    <p>
-        <span id="status">Unknown</span>
-        <br/>
-        <input type="button" value="Start" onclick="socket.emit('start')" />
-        <input type="button" value="Stop" onclick="input('c_shutdown(true)')" />
-        <input type="button" value="Kill" onclick="socket.emit('kill')" />
-    </p>
-    <h2>Console</h2>
+    
+    <!-- Tools bar -->
+    
+    <div id="toolsBar">
+        
+    
+    
+    
+        <span id="status">Server statue - Unknown</span>
+            
+            
+            <input class="buttonControl" id="start" type="button" value="Start" onclick="socket.emit('start')" />
+            <input class="buttonControl" id="stop" type="button" value="Stop" onclick="input('c_shutdown(true)')" />
+            <input class="buttonControl" id="kill" type="button" value="Kill" onclick="socket.emit('kill')" />
+    
+        
+    </div>
+    
+    
+    <!-- Title -->
+    
+        <h1> Don't Starve Together server admin </h1>
+  
+ 
+    <!-- Console -->
+    
     <div id="console">
         <div id="logCont">
             <div id="log">
 
             </div>
         </div>
-        <form id="input">
-            <input type="text" name="command">
-            <input type="submit" value="Send" />
+        
+        <form id="stdin">
+            <input type="text" value="Insert your command" name="command">
         </form>
+        
     </div>
+    
+    
     <h2>Global Commands</h2>
     <div id="globalCommands">
 
